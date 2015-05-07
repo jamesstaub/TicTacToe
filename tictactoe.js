@@ -6,8 +6,8 @@
 // gameover if
   //
 
-var gameboard = [[1, 1, 1],
-                 [0, 1, null],
+var gameboard = [[0, 1, 1],
+                 [0, 1, 0],
                  [null, 1, null]];
 
 
@@ -75,12 +75,16 @@ function checkForWinner(){
   var countThree = 0;
   for(i=0; i<3; i++){
     for(j=0; j<3; j++){
-      checkThree(i, j, "col");
-       checkThree(i, j, "row");
-      // checkThree(j, i);
-      // checkDiagonal();
+      checkThree(j, i, "col");
     }
   }
+  for(i=0; i<3; i++){
+    for(j=0; j<3; j++){
+      checkThree(i, j, "row");
+    }
+  }
+
+
       // console.log("i: " + i + "... j: " +j+ gameboard[i][j]);
 
       // console.log("j mod 3: " + j % 3);
