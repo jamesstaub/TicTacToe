@@ -1,24 +1,19 @@
-// add turns to the grid
-    // check if place is open
-    // check if gameover after move
-    // can't play if gameover
-
-// gameover if
-  //
-
+/* global gameboard; */
 var gameboard = [[0, 1, 1],
                  [0, 1, 0],
                  [null, 1, null]];
-
 
 var currentPlayer = 1;
 // alternate the currentplayer variable
 function incPlayer(){
   currentPlayer++;
-  if(currentPlayer === 2){currentPlayer = 0;}
-  // currentPlayer = currentPlayer % 2;
-  return currentPlayer;
+  currentPlayer = currentPlayer % 2;
+
 }
+
+
+
+
 
 function makeMove(y, x){
   if(currentPlayer === 0){
@@ -30,23 +25,21 @@ function makeMove(y, x){
   incPlayer();
 }
 
-
-
 var countThree = 0;
-var thisTotal = 0;
+ var holdValue = 0;
+function checkOneCell(y, x, axis){
 
-function checkThree(y, x, axis){
-  var holdValue = 0;
   // z is whichever axis we're currently checking for
+  // use ternary
   var z;
   if(axis === "row"){
     z = y;
+
   }else if (axis === "col"){
     z = x;
   }
-
   // resets the countThree at beginning of each new row or column
-  if(z !== thisTotal){
+  if(z !== holdValue){
     countThree = 0;
   }
 
@@ -62,28 +55,24 @@ function checkThree(y, x, axis){
     console.log("winner on " + axis + " " + z);
     countThree = 0;
   }
-  thisTotal = z;
-
+  //  sets holdValue to the current
+  holdValue = z;
 
 }
 
-function checkCol(y, x){
-}
+
 
 function checkForWinner(){
-  // check for columns
+  //
   var countThree = 0;
-  for(i=0; i<3; i++){
-    for(j=0; j<3; j++){
-      checkThree(j, i, "col");
+  for(e=0; e<2; e++){
+    for(i=0; i<3; i++){
+      for(j=0; j<3; j++){
+        if(e === 0){ checkThree(j, i, "col");}
+        if(e === 1){checkThree(i, j, "row");}
+      }
     }
   }
-  for(i=0; i<3; i++){
-    for(j=0; j<3; j++){
-      checkThree(i, j, "row");
-    }
-  }
-
 
       // console.log("i: " + i + "... j: " +j+ gameboard[i][j]);
 
@@ -94,3 +83,16 @@ checkForWinner();
 
 
 // check for win before incrementing turn
+
+
+// add turns to the grid
+    // check if place is open
+    // check if gameover after move
+    // can't play if gameover
+
+// gameover if
+  //
+
+function playerMove(y, x, currentplayer){
+  gameboard[y][x] = currentPlayer
+}
