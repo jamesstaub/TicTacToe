@@ -1,85 +1,110 @@
-/* global gameboard; */
-var gameboard = [[0, 1, 1],
-                 [0, 1, 0],
-                 [null, 1, null]];
+// because magic, don't worry about it
+var magicSquare = [1, 6, 5, 8, 4, 0, 3, 2, 7];
 
-var currentPlayer = 1;
 // alternate the currentplayer variable
-function incPlayer(){
-  currentPlayer++;
-  currentPlayer = currentPlayer % 2;
-
+// player0 is X player 1 is O
+var currentPlayer = 0;
+function togglePlayer(){
+  currentPlayer = 1 - currentPlayer;
 }
 
 
+// stores the sum of evry possible pair of magic numbers chosen by each player
+// determines winner
+var magicPairsX = [];
+var magicPairsO = [];
+function checkPickAgainstPairsArray(choiceval){
+  // thisPairsArray determines which player we're dealing with
+  var thisMagicPairsArray = currentPlayer ? magicPairsO : magicPairsX;
+  var isWinningSum
+  if(thisMagicPairsArray.length > 0){
+    thisMagicPairsArray.forEach(function(mNumber){
+      if(mNumber + choiceval === 12){
+        isWinningSum = true;
+      } else{
+        isWinningSum = false;
+      }
+    });
+    return isWinningSum;
+  }
+}
 
+// keep track of total moves
+function checkForTie(){
+    if(chosenValueArrayX.length + chosenValueArrayO.length === 9 ){
+    return true;
+  }
+}
 
-
-function makeMove(y, x){
+// stores individual magic number from each choice of each player
+var chosenValueArrayX = [];
+var chosenValueArrayO = [];
+function addPickToArray(choiceval){
+  // currentPlayer ? chosenValueArrayO : chosenValueArrayX;
   if(currentPlayer === 0){
-    gameboard[y][x] = "X";
+    chosenValueArrayX.push(choiceval);
   }else{
-    gameboard[y][x] = "O";
+    chosenValueArrayO.push(choiceval);
   }
-  // checkForWinner();
-  incPlayer();
-}
-
-var countThree = 0;
- var holdValue = 0;
-function checkOneCell(y, x, axis){
-
-  // z is whichever axis we're currently checking for
-  // use ternary
-  var z;
-  if(axis === "row"){
-    z = y;
-
-  }else if (axis === "col"){
-    z = x;
-  }
-  // resets the countThree at beginning of each new row or column
-  if(z !== holdValue){
-    countThree = 0;
-  }
-
-  // increment the countThree for every filled in piece
-  if(gameboard[y][x] === currentPlayer){
-    countThree++;
-  }else{
-    countThree = 0;
-  }
-
-  // if it hits count of 3,
-  if(countThree === 3){
-    console.log("winner on " + axis + " " + z);
-    countThree = 0;
-  }
-  //  sets holdValue to the current
-  holdValue = z;
-
 }
 
 
+function createSumsOfPairs(choiceval){
+  // choose which array depending on current player
+  var thisChosenValueArray = currentPlayer ? chosenValueArrayO : chosenValueArrayX;
+  var thisMagicPairsArray = currentPlayer ? magicPairsO : magicPairsX;
+  // iterate over the list of single chosen values to create all possible pairs
+  thisChosenValueArray.forEach(function(mNumber){
+    // this will execute for the first time after each player's second turn, because single values get added to array after this is gets called
+      thisMagicPairsArray.push(mNumber + choiceval);
+  });
+}
 
-function checkForWinner(){
-  //
-  var countThree = 0;
-  for(e=0; e<2; e++){
-    for(i=0; i<3; i++){
-      for(j=0; j<3; j++){
-        if(e === 0){ checkThree(j, i, "col");}
-        if(e === 1){checkThree(i, j, "row");}
+
+// var piece stores the ID of the currently chosen piece
+var thisChosenValue;
+$(document).ready(function() {
+  // create the board!
+  for(var i=0; i<magicSquare.length; i++){
+    $('#gamesquares').append('<div id="'+magicSquare[i]+'" class="gamepiece"></div>');
+  }
+
+  // invoke the logic!
+  $('.gamepiece').on('click', function(e){
+    // don't allow player to click if space is full
+    if(!$(this).hasClass('taken')){
+      $(this).addClass('taken');
+
+      // variable contains X or O depending on player
+      var thisPlayerString = currentPlayer ? "O" : "X";
+
+      // assign the variable thisChosenNumber to the ID of the chosen space
+      thisChosenValue = Number($(this).attr('ID'));
+
+      // Add the string X or O
+      $(this).append("<span>"+thisPlayerString+"</span>");
+
+      // check if this wins for us
+      if(checkPickAgainstPairsArray(thisChosenValue)){
+        console.log("winner: " + currentPlayer);
+      }else{
+        createSumsOfPairs(thisChosenValue);
+        addPickToArray(thisChosenValue);
+        if(checkForTie()){
+          console.log("tie!");
+        }else{
+         togglePlayer();
+        }
       }
     }
-  }
 
-      // console.log("i: " + i + "... j: " +j+ gameboard[i][j]);
-
-      // console.log("j mod 3: " + j % 3);
-}
-
-checkForWinner();
+    // reset
+    $('#reset').on('click', function(){
+      $(".taken").removeClass("taken");
+      $(".gamepiece").html('');
+    });
+  });
+});
 
 
 // check for win before incrementing turn
@@ -91,8 +116,7 @@ checkForWinner();
     // can't play if gameover
 
 // gameover if
-  //
 
 function playerMove(y, x, currentplayer){
-  gameboard[y][x] = currentPlayer
+  gameboard[y][x] = currentPlayer;
 }
