@@ -1,0 +1,12 @@
+{
+  "firebase": "chatex",
+  "public": "app",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**",
+    "**/bower_components/**",
+    "**/coverage/**",
+    "**/test/**"
+  ]
+}

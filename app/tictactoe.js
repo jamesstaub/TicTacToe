@@ -86,7 +86,15 @@ $(document).ready(function() {
 
       // check if this wins for us
       if(checkPickAgainstPairsArray(thisChosenValue)){
-        console.log("winner: " + currentPlayer);
+        currentPlayer =  currentPlayer ? "O" : "X";
+        $('#notification').html(currentPlayer + " Wins!")
+
+        $('.gamepiece').each(function(){
+          $(this).addClass('taken');
+
+        });
+
+
       }else{
         createSumsOfPairs(thisChosenValue);
         addPickToArray(thisChosenValue);
@@ -105,6 +113,37 @@ $(document).ready(function() {
     });
   });
 });
+
+    $('#r1').on('click', function(){
+      $('#gamesquares').removeClass('rotate-1');
+      $('#gamesquares').removeClass('rotate-3');
+      $('#gamesquares').removeClass('rotate-2');
+      $('#gamesquares').addClass('rotate-4');
+      $('body').addClass('pinwheel');
+
+    });
+    $('#r2').on('click', function(){
+      $('#gamesquares').removeClass('rotate-1');
+      $('#gamesquares').removeClass('rotate-34');
+      $('#gamesquares').removeClass('rotate-2');
+      $('#gamesquares').addClass('rotate-3');
+      $('body').addClass('pinwheel');
+    });
+    $('#r3').on('click', function(){
+      $('#gamesquares').removeClass('rotate-1');
+      $('#gamesquares').removeClass('rotate-3');
+      $('#gamesquares').removeClass('rotate-4');
+      $('#gamesquares').addClass('rotate-2');
+      $('body').addClass('pinwheel');
+    });
+    $('#r4').on('click', function(){
+      $('#gamesquares').removeClass('rotate-1');
+      $('#gamesquares').removeClass('rotate-2');
+      $('#gamesquares').removeClass('rotate-3');
+      $('#gamesquares').removeClass('rotate-4');
+      $('#gamesquares').addClass('rotate-1');
+      $('body').addClass('pinwheel');
+    });
 
 
 // check for win before incrementing turn
