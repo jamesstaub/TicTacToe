@@ -18,20 +18,23 @@ $(document).ready(function() {
       var thisChosenValue = Number($(this).attr('ID'));
 
       // Add the string X or O
-      $(this).append("<span>"+thisPlayerString+"</span>");
+      $(this).append("<span>" + thisPlayerString + "</span>");
 
       // check if this wins for us
+
       if(TicTacToe.checkPickAgainstPairsArray(thisChosenValue)){
+        console.log("winner!  ");
         var playerSymbol =  TicTacToe.currentPlayer ? "O" : "X";
         $('#notification').html(playerSymbol + " Wins!")
 
         $('.gamepiece').each(function(){
           $(this).addClass('taken');
-
         });
 
-
       }else{
+        createSumsOfPairs(thisChosenValue);
+        addPickToArray(thisChosenValue);
+
         if(TicTacToe.checkForTie()){
           console.log("tie!");
         }else{

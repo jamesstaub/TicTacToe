@@ -65,12 +65,13 @@ body{
 #info{
   height: auto;
   position: absolute;
-  bottom: 50px;
+  bottom: 0px;
   left: calc(50% - 200px);
   width: 400px;
   background: #222;
   padding: 10px;
   color:white;
+  display: none;
 }
 #info p{
   font-size: 32px;

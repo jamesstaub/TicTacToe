@@ -16,7 +16,7 @@ var magicPairsO = [];
 function checkPickAgainstPairsArray(choiceval){
   // thisPairsArray determines which player we're dealing with
   var thisMagicPairsArray = currentPlayer ? magicPairsO : magicPairsX;
-  var isWinningSum
+  var isWinningSum;
   if(thisMagicPairsArray.length > 0){
     thisMagicPairsArray.forEach(function(mNumber){
       if(mNumber + choiceval === 12){
