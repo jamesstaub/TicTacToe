@@ -61,7 +61,7 @@ function createSumsOfPairs(choiceval){
 }
 
 
-// var piece stores the ID of the currently chosen piece
+
 var thisChosenValue;
 $(document).ready(function() {
   // create the board!
@@ -91,7 +91,6 @@ $(document).ready(function() {
 
         $('.gamepiece').each(function(){
           $(this).addClass('taken');
-
         });
 
 
@@ -120,8 +119,8 @@ $(document).ready(function() {
       $('#gamesquares').removeClass('rotate-2');
       $('#gamesquares').addClass('rotate-4');
       $('body').addClass('pinwheel');
-
     });
+
     $('#r2').on('click', function(){
       $('#gamesquares').removeClass('rotate-1');
       $('#gamesquares').removeClass('rotate-34');
