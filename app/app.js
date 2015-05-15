@@ -23,9 +23,11 @@ $(document).ready(function() {
       // check if this wins for us
 
       if(TicTacToe.checkPickAgainstPairsArray(thisChosenValue)){
-        console.log("winner!  ");
+        $('#info').css('display', 'inline-block');
         var playerSymbol =  TicTacToe.currentPlayer ? "O" : "X";
+        $('#info').css('display', 'inline')
         $('#notification').html(playerSymbol + " Wins!")
+
 
         $('.gamepiece').each(function(){
           $(this).addClass('taken');
@@ -36,7 +38,8 @@ $(document).ready(function() {
         addPickToArray(thisChosenValue);
 
         if(TicTacToe.checkForTie()){
-          console.log("tie!");
+          $('#info').css('display', 'inline-block');
+          $('#notification').html("Tie Game...wow!");
         }else{
          TicTacToe.togglePlayer();
         }
@@ -47,7 +50,10 @@ $(document).ready(function() {
     $('#reset').on('click', function(){
       $(".taken").removeClass("taken");
       $(".gamepiece").html('');
-      resetArrays();
+      $('#gamesquares').removeClass('rotate-1 rotate-2 rotate-3 rotate-4');
+      $('#notification').html('');
+      $('#info').css('display', 'none');
+      TicTacToe.reset();
     });
   });
 
@@ -57,7 +63,7 @@ $(document).ready(function() {
       $('#gamesquares').removeClass('rotate-3');
       $('#gamesquares').removeClass('rotate-2');
       $('#gamesquares').addClass('rotate-4');
-      $('body').addClass('pinwheel');
+
 
     });
     $('#r2').on('click', function(){
@@ -65,14 +71,14 @@ $(document).ready(function() {
       $('#gamesquares').removeClass('rotate-34');
       $('#gamesquares').removeClass('rotate-2');
       $('#gamesquares').addClass('rotate-3');
-      $('body').addClass('pinwheel');
+
     });
     $('#r3').on('click', function(){
       $('#gamesquares').removeClass('rotate-1');
       $('#gamesquares').removeClass('rotate-3');
       $('#gamesquares').removeClass('rotate-4');
       $('#gamesquares').addClass('rotate-2');
-      $('body').addClass('pinwheel');
+
     });
     $('#r4').on('click', function(){
       $('#gamesquares').removeClass('rotate-1');
@@ -80,7 +86,7 @@ $(document).ready(function() {
       $('#gamesquares').removeClass('rotate-3');
       $('#gamesquares').removeClass('rotate-4');
       $('#gamesquares').addClass('rotate-1');
-      $('body').addClass('pinwheel');
+
     });
 
 

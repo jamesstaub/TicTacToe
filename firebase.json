@@ -1,5 +1,5 @@
 {
-  "firebase": "chatex",
+  "firebase": "js-tictactoe",
   "public": "app",
   "ignore": [
     "firebase.json",

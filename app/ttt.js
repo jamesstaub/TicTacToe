@@ -17,6 +17,15 @@ TicTacToe.checkForTie = function(){
   }
 }
 
+TicTacToe.reset = function(){
+  this.chosenValueArrayX = [];
+  this.chosenValueArrayO = [];
+  this.currentPlayer = 0;
+  this.magicPairsX = [];
+  this.magicPairsO = [];
+
+}
+
 TicTacToe.togglePlayer = function(){
   this.currentPlayer = 1 - this.currentPlayer;
 };

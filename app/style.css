@@ -1,13 +1,11 @@
 
 body{
   background-color: #aaa;
-}
-
-.pinwheel{
-  background-image: url('pinwheel.jpg');
+    background-image: url('pinwheel.jpg');
   background-position: -22px -50px;
-
 }
+
+
 
 #container{
   width: 100%;
@@ -63,38 +61,45 @@ body{
 }
 
 #info{
-  height: auto;
+  height: 100px;
   position: absolute;
-  bottom: 0px;
+  top: 35%;
   left: calc(50% - 200px);
   width: 400px;
   background: #222;
   padding: 10px;
   color:white;
   display: none;
+
 }
+
 #info p{
   font-size: 32px;
   text-align: center;
   margin: 0;
+  height: 40px;
 
 }
 
-#controls p{
-  width: 50%;
-  float: left;
-  font-size: 24px
+#controls{
+  width: 100%;
+  font-size: 24px;
+  position:absolute;
+  bottom: 0;
+  padding: 15px;
+  color: white;
+  background-color: #111;
+  text-align: center;
 }
 
 #reset{
-  float: left;
+
   font-size: 24px;
   margin: 5px 0;
-  width: 50%;
+  width: 100%;
 }
 #notification{
-  float: right;
-  padding: 0 10px;
+  width: 100%;
 }
 
 /*rotate animation*/
