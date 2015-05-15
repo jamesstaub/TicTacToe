@@ -89,5 +89,10 @@ $(document).ready(function() {
 
     });
 
+    $('body').on('click', function(){
+      var randzie = (Math.random() * 500) + 100;
+      $(this).css('background-size', 'auto '+randzie+'% ' );
+    })
+
 
 });

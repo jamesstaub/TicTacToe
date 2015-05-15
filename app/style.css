@@ -1,8 +1,15 @@
 
 body{
-  background-color: #aaa;
+    background-color: #aaa;
     background-image: url('pinwheel.jpg');
-  background-position: -22px -50px;
+    background-position: center center;
+    transition: background-size 0.4s linear;
+    -moz-transition: background-size 0.4s linear;
+    -ms-transition: background-size 0.4s linear;
+    -o-transition: background-size 0.4s linear;
+    -webkit-transition: background-size 0.4s linear;
+
+
 }
 
 
